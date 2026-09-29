@@ -10,8 +10,8 @@ const profile = {
   availability: "Open to Data Analyst roles",
   pitch:
     "Transforming raw data into operational efficiency — using SQL, Python and BI dashboards to surface the metrics that drive decisions.",
-  email: "your.email@example.com",
-  linkedin: "https://www.linkedin.com/in/your-profile/",
+  email: "athangghag@gmail.com",
+  linkedin: "https://www.linkedin.com/in/athangghag/",
   github: "https://github.com/athang11",
   resume: "https://athang11.github.io/resume/",
   tableau: "https://public.tableau.com/app/profile/your-profile",
