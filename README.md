@@ -15,7 +15,7 @@ assets/script.js   # All content (profile, stack, projects) + rendering logic
 
 Edit the data objects at the top of `assets/script.js`:
 
-- `profile` — name, role, pitch, email, LinkedIn, GitHub, resume and Tableau Public links. Set a link to `""` to hide its buttons.
+- `profile` — role, pitch, email, LinkedIn, GitHub, resume and Tableau Public links. Set a link to `""` to hide its buttons.
 - `stack` — tool categories shown in the "Core Analytics Stack" grid.
 - `projects` — one object per case study with `title`, `problem`, `toolsUsed`, `keyInsight`, `githubLink` and `dashboardLink` (use `""` if there is no live dashboard).
 

@@ -5,7 +5,7 @@
 // Personal details & links used throughout the page.
 // Leave a link as an empty string ("") to hide the buttons that use it.
 const profile = {
-  name: "Athang",
+  name: "Home",
   role: "Data Analyst",
   availability: "Open to Data Analyst roles",
   pitch:
@@ -46,64 +46,64 @@ const stack = [
 // Set dashboardLink to "" if the project has no live dashboard.
 const projects = [
   {
-    title: "Customer Churn Analysis",
+    title: "Expected Goals (xG) Model",
     problem:
-      "A subscription business was losing customers without knowing which segments were most at risk.",
-    toolsUsed: ["SQL", "PostgreSQL", "Python", "Tableau"],
+      "Raw shot counts don't show how good a team's chances really are; clubs need a probability for every shot.",
+    toolsUsed: ["Python", "Pandas", "Scikit-Learn", "XGBoost", "Jupyter"],
     keyInsight:
-      "Uncovered a 14% drop in customer retention after month 3; built a dashboard to track churn risk factors by cohort.",
-    githubLink: "https://github.com/athang11/customer-churn-analysis",
-    dashboardLink: "https://public.tableau.com/",
-  },
-  {
-    title: "E-commerce Sales Performance",
-    problem:
-      "Leadership lacked a single view of revenue, margin and return rates across regions and product lines.",
-    toolsUsed: ["SQL", "BigQuery", "Power BI", "Excel"],
-    keyInsight:
-      "Identified 3 low-margin SKUs driving 22% of returns; recommended pricing changes projected to lift margin by 4 pts.",
-    githubLink: "https://github.com/athang11/ecommerce-sales-dashboard",
-    dashboardLink: "https://app.powerbi.com/",
-  },
-  {
-    title: "Supply Chain Delivery Forecasting",
-    problem:
-      "Late deliveries were hurting customer satisfaction and the ops team couldn't predict delays in advance.",
-    toolsUsed: ["Python", "Pandas", "Scikit-Learn", "AWS"],
-    keyInsight:
-      "Built a delay-risk model (0.84 AUC) flagging at-risk orders 48h early, enabling a potential 18% reduction in late shipments.",
-    githubLink: "https://github.com/athang11/delivery-delay-forecasting",
+      "Built separate open-play and set-piece xG models with gradient boosting (calibrated XGBoost), so every shot gets a goal probability for match and player analysis.",
+    githubLink: "https://github.com/athang11/xG_Model",
     dashboardLink: "",
   },
   {
-    title: "Marketing Campaign A/B Test",
+    title: "Expected Pass (xPass) Model",
     problem:
-      "The marketing team needed to know whether a new email campaign actually improved conversions.",
-    toolsUsed: ["SQL", "R", "Looker Studio"],
+      "Pass completion rates don't account for how hard a pass is, so they can't fairly compare players' passing quality.",
+    toolsUsed: ["Python", "Pandas", "Scikit-Learn"],
     keyInsight:
-      "Proved a statistically significant 9% conversion lift (p < 0.05) and reported ROI in a self-serve Looker Studio report.",
-    githubLink: "https://github.com/athang11/ab-test-analysis",
-    dashboardLink: "https://lookerstudio.google.com/",
-  },
-  {
-    title: "HR Attrition Exploratory Analysis",
-    problem:
-      "HR wanted to understand the drivers of employee attrition to design better retention programs.",
-    toolsUsed: ["Python", "Pandas", "NumPy", "Seaborn"],
-    keyInsight:
-      "Found overtime and < 2 years tenure were the top attrition drivers, accounting for 61% of voluntary exits.",
-    githubLink: "https://github.com/athang11/hr-attrition-eda",
+      "Models the probability that each pass is completed, so players can be judged on passes completed above expectation instead of raw accuracy.",
+    githubLink: "https://github.com/athang11/xPass_Model",
     dashboardLink: "",
   },
   {
-    title: "Retail Inventory Optimization",
+    title: "Football Analytics",
     problem:
-      "Stores were overstocking slow-moving items while frequently running out of best sellers.",
-    toolsUsed: ["SQL", "PostgreSQL", "Excel", "Tableau", "Git"],
+      "Football event data is dense and hard for coaches and scouts to read without clear visual summaries.",
+    toolsUsed: ["Python", "Pandas", "Seaborn"],
     keyInsight:
-      "ABC analysis revealed 20% of SKUs drove 78% of sales; reorder-point model cut projected stockouts by 30%.",
-    githubLink: "https://github.com/athang11/inventory-optimization",
-    dashboardLink: "https://public.tableau.com/",
+      "Football data visualisations alongside xG and xPass models, turning event data into charts that show team and player performance.",
+    githubLink: "https://github.com/athang11/Football-Analytics",
+    dashboardLink: "",
+  },
+  {
+    title: "Cricket Analytics",
+    problem:
+      "Traditional cricket averages and strike rates don't show a player's value by match situation.",
+    toolsUsed: ["Python", "Pandas"],
+    keyInsight:
+      "Analysis of cricket match data looking at player and team performance beyond headline averages.",
+    githubLink: "https://github.com/athang11/Cricket-Analytics",
+    dashboardLink: "",
+  },
+  {
+    title: "SDEs for Wind Speed Modelling (MSc Dissertation)",
+    problem:
+      "Wind energy planning needs reliable models of wind speed, which is noisy and changes over time.",
+    toolsUsed: ["Python", "NumPy", "Pandas", "Jupyter"],
+    keyInsight:
+      "MSc Data Science & Analytics dissertation: exploratory analysis of wind speed data and parameter estimation for stochastic differential equation models.",
+    githubLink: "https://github.com/athang11/SDEs-for-Wind-Speed-Modelling",
+    dashboardLink: "",
+  },
+  {
+    title: "Data Science Coursera",
+    problem:
+      "Coursework repository for the Coursera Data Science programme.",
+    toolsUsed: ["R", "Git"],
+    keyInsight:
+      "Foundational coursework in R programming, version control with Git, and the data science workflow.",
+    githubLink: "https://github.com/athang11/datasciencecoursera",
+    dashboardLink: "",
   },
 ];
 
@@ -154,7 +154,8 @@ function renderKPIs() {
     { label: "Tools applied", value: uniqueTools.size, icon: "wrench" },
     { label: "Live dashboards", value: projects.filter((p) => safeURL(p.dashboardLink)).length, icon: "monitor" },
     { label: "Stack categories", value: stack.length, icon: "layers" },
-  ];
+  ].filter((k) => k.label !== "Live dashboards" || k.value > 0);
+  document.getElementById("kpis").classList.toggle("sm:grid-cols-4", kpis.length === 4);
   document.getElementById("kpis").innerHTML = kpis
     .map(
       (k) => `
