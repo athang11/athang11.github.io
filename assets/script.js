@@ -159,11 +159,11 @@ function renderKPIs() {
   document.getElementById("kpis").innerHTML = kpis
     .map(
       (k) => `
-      <div class="rounded-xl border border-slate-800 bg-slate-900/70 p-5 shadow-sm">
-        <dt class="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-slate-500">
-          <i data-lucide="${k.icon}" class="h-3.5 w-3.5 text-teal-400"></i>${escapeHTML(k.label)}
+      <div class="kpi-card">
+        <dt class="kpi-label">
+          <i data-lucide="${k.icon}"></i>${escapeHTML(k.label)}
         </dt>
-        <dd class="mt-2 font-mono text-3xl font-semibold text-white">${escapeHTML(k.value)}</dd>
+        <dd class="kpi-value">${escapeHTML(k.value)}</dd>
       </div>`
     )
     .join("");
@@ -173,18 +173,16 @@ function renderStack() {
   document.getElementById("stack-grid").innerHTML = stack
     .map(
       (group) => `
-      <article class="rounded-xl border border-slate-800 bg-slate-900 p-5 shadow-sm transition hover:-translate-y-1 hover:border-teal-500/60 hover:shadow-lg">
-        <div class="flex items-center gap-3">
-          <span class="flex h-9 w-9 items-center justify-center rounded-md bg-blue-500/10 text-blue-400 ring-1 ring-blue-500/30">
-            <i data-lucide="${escapeHTML(group.icon)}" class="h-4 w-4"></i>
-          </span>
-          <h3 class="font-semibold text-white">${escapeHTML(group.category)}</h3>
+      <article class="stack-card">
+        <div class="stack-title">
+          <i data-lucide="${escapeHTML(group.icon)}"></i>
+          <h3>${escapeHTML(group.category)}</h3>
         </div>
-        <ul class="mt-4 flex flex-wrap gap-2">
+        <ul class="tag-list">
           ${group.tools
             .map(
               (tool) =>
-                `<li class="rounded border border-slate-700 bg-slate-800/60 px-2.5 py-1 font-mono text-xs text-slate-200">${escapeHTML(tool)}</li>`
+                `<li>${escapeHTML(tool)}</li>`
             )
             .join("")}
         </ul>
@@ -197,45 +195,45 @@ function projectCard(project) {
   const github = safeURL(project.githubLink);
   const dashboard = safeURL(project.dashboardLink);
   return `
-    <article class="flex flex-col rounded-2xl border border-slate-800 border-t-4 border-t-teal-500 bg-slate-900 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-      <h3 class="text-xl font-bold text-white">${escapeHTML(project.title)}</h3>
+    <article class="project-card">
+      <h3>${escapeHTML(project.title)}</h3>
 
       <div class="mt-4">
-        <p class="font-mono text-[11px] uppercase tracking-widest text-slate-500">Business problem</p>
-        <p class="mt-1 text-sm leading-relaxed text-slate-300">${escapeHTML(project.problem)}</p>
+        <p class="project-label">Business problem</p>
+        <p class="project-copy">${escapeHTML(project.problem)}</p>
       </div>
 
-      <ul class="mt-4 flex flex-wrap gap-1.5" aria-label="Tech stack">
+      <ul class="tag-list" aria-label="Tech stack">
         ${project.toolsUsed
           .map(
             (tool) =>
-              `<li class="rounded-full bg-blue-500/10 px-2.5 py-0.5 font-mono text-[11px] font-medium text-blue-300 ring-1 ring-blue-500/30">${escapeHTML(tool)}</li>`
+              `<li>${escapeHTML(tool)}</li>`
           )
           .join("")}
       </ul>
 
-      <div class="mt-5 rounded-lg border-l-4 border-teal-400 bg-teal-500/5 p-4">
-        <p class="flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-teal-400">
-          <i data-lucide="trending-up" class="h-3.5 w-3.5"></i> Key insight / impact
+      <div class="project-impact">
+        <p class="project-label">
+          <i data-lucide="trending-up"></i> Key insight / impact
         </p>
-        <p class="mt-1 text-sm font-medium leading-relaxed text-slate-100">${escapeHTML(project.keyInsight)}</p>
+        <p class="project-copy">${escapeHTML(project.keyInsight)}</p>
       </div>
 
-      <div class="mt-auto flex flex-wrap gap-3 pt-6">
+      <div class="project-links">
         ${
           github
-            ? `<a href="${escapeHTML(github)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md bg-teal-500 px-4 py-2 text-sm font-bold text-slate-950 hover:bg-teal-400">
-                 <i data-lucide="github" class="h-4 w-4"></i> Read Case Study / Code
+            ? `<a href="${escapeHTML(github)}" target="_blank" rel="noopener noreferrer">
+                 <i data-lucide="github"></i> Read Case Study / Code
                </a>`
             : ""
         }
         ${
           dashboard
-            ? `<a href="${escapeHTML(dashboard)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md border border-slate-700 px-4 py-2 text-sm font-semibold text-white hover:border-teal-500/60">
-                 <i data-lucide="external-link" class="h-4 w-4"></i> View Live Dashboard
+            ? `<a href="${escapeHTML(dashboard)}" target="_blank" rel="noopener noreferrer">
+                 <i data-lucide="external-link"></i> View Live Dashboard
                </a>`
-            : `<span class="inline-flex cursor-not-allowed items-center gap-2 rounded-md border border-dashed border-slate-800 px-4 py-2 text-sm text-slate-500">
-                 <i data-lucide="monitor-off" class="h-4 w-4"></i> No live dashboard
+            : `<span>
+                 <i data-lucide="monitor-off"></i> No live dashboard
                </span>`
         }
       </div>
@@ -251,11 +249,7 @@ function renderFilters() {
     .map((tool) => {
       const active = tool === activeFilter;
       return `<button type="button" data-filter="${escapeHTML(tool)}" aria-pressed="${active}"
-        class="rounded-full px-3 py-1 font-mono text-xs transition ${
-          active
-            ? "bg-teal-500 text-slate-950"
-            : "border border-slate-700 text-slate-300 hover:border-teal-500/60"
-        }">${escapeHTML(tool)}</button>`;
+        class="filter-button">${escapeHTML(tool)}</button>`;
     })
     .join("");
 }
@@ -330,12 +324,12 @@ function initNav() {
   const toggle = document.getElementById("menu-toggle");
   const menu = document.getElementById("mobile-menu");
   toggle.addEventListener("click", () => {
-    const open = menu.classList.toggle("hidden") === false;
+    const open = menu.classList.toggle("open");
     toggle.setAttribute("aria-expanded", String(open));
   });
   menu.querySelectorAll("a").forEach((a) =>
     a.addEventListener("click", () => {
-      menu.classList.add("hidden");
+      menu.classList.remove("open");
       toggle.setAttribute("aria-expanded", "false");
     })
   );

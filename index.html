@@ -1,254 +1,394 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Data Analyst portfolio: SQL, Python, Tableau and Power BI projects that turn raw data into clear decisions." />
+  <meta name="theme-color" content="#b6c895" />
   <title>Home | Data Analyst Portfolio</title>
-  <meta name="description" content="Data Analyst portfolio: SQL, Python, Tableau and Power BI case studies that turn raw data into business impact." />
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['DM Sans', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-            display: ['Space Grotesk', 'DM Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
-          },
-          colors: {
-            slate: {
-              950: '#f7f4ec',
-              900: '#fffdf8',
-              800: '#e8e1d4',
-              700: '#d5cbb9',
-              500: '#786f62',
-              400: '#5c554b',
-              300: '#423d35',
-              200: '#29251f',
-            },
-            teal: {
-              50: '#fff1ec',
-              100: '#ffe0d6',
-              200: '#ffc2b1',
-              300: '#ff987e',
-              400: '#fa7157',
-              500: '#f15a3b',
-              600: '#dc4329',
-              700: '#b93622',
-              800: '#922e20',
-              900: '#76291f',
-              950: '#40130e',
-            },
-            blue: {
-              50: '#eff6ff',
-              100: '#dceaff',
-              200: '#b8d4ff',
-              300: '#8cb9ff',
-              400: '#5d98f4',
-              500: '#3877da',
-              600: '#285fba',
-              700: '#244c91',
-              800: '#223f73',
-              900: '#20365e',
-              950: '#14213b',
-            },
-          },
-        },
-      },
-    };
-  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Lucide Icons & Chart.js -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
-
   <style>
+    :root {
+      color-scheme: light;
+      --ink: #19202d;
+      --muted: #6b6c63;
+      --paper: #f6f5ef;
+      --line: #deded2;
+      --orange: #f6a324;
+      --hot: #f34a0b;
+      --blue: #367ef5;
+      --green: #568b37;
+      font-family: "DM Sans", sans-serif;
+      scroll-behavior: smooth;
+    }
+    * { box-sizing: border-box; }
     body {
-      background-color: #f7f4ec;
-      color: #423d35;
-    }
-
-    .text-white {
-      color: #29251f !important;
-    }
-
-    .grid-bg {
-      background-color: #fff9e9;
+      margin: 0;
+      color: var(--ink);
+      background-color: #a8bd83;
       background-image:
-        linear-gradient(rgba(241, 90, 59, 0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(241, 90, 59, 0.07) 1px, transparent 1px);
-      background-size: 36px 36px;
+        radial-gradient(ellipse at 16% 32%, rgba(242, 246, 208, .42), transparent 34%),
+        radial-gradient(ellipse at 84% 75%, rgba(55, 99, 37, .36), transparent 38%),
+        repeating-linear-gradient(112deg, transparent 0 72px, rgba(69, 103, 46, .11) 73px 77px, transparent 78px 145px),
+        linear-gradient(135deg, #9db67d, #c3d09a 45%, #8fa96b);
+      min-height: 100vh;
     }
-
-    #top {
-      background-image: radial-gradient(ellipse at 82% 18%, rgba(255, 212, 92, 0.32), transparent 32%);
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .skip-link { position: fixed; top: -60px; left: 12px; z-index: 100; padding: 10px 14px; background: white; }
+    .skip-link:focus { top: 12px; }
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 5px;
+      display: flex;
+      min-height: 51px;
+      align-items: center;
+      gap: 24px;
+      margin: 5px 7px 0;
+      padding: 5px 17px;
+      border: 1px solid rgba(255,255,255,.58);
+      border-radius: 6px;
+      background: rgba(239, 241, 221, .88);
+      box-shadow: 0 2px 8px rgba(36, 47, 25, .08);
+      backdrop-filter: blur(12px);
     }
-
-    h1,
-    h2,
-    h3 {
-      font-family: 'Space Grotesk', 'DM Sans', sans-serif;
-      letter-spacing: -0.035em;
+    .brand-mark { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 9px; font-weight: 800; letter-spacing: -.04em; }
+    .logo-icon { display: inline-flex; align-items: end; gap: 2px; width: 26px; height: 23px; overflow: hidden; }
+    .logo-icon i { display: block; width: 5px; border-radius: 5px 5px 0 0; transform: skewY(24deg); }
+    .logo-icon i:nth-child(1) { height: 17px; background: #2477fa; }
+    .logo-icon i:nth-child(2) { height: 21px; background: #fb4c0c; }
+    .logo-icon i:nth-child(3) { height: 19px; background: #ffb21c; }
+    .logo-icon i:nth-child(4) { height: 13px; background: #1c2029; }
+    .top-links { display: flex; align-items: center; gap: 24px; flex: 1; font-size: 15px; font-weight: 600; }
+    .top-links a:hover, .rail-link:hover { color: #d84a14; }
+    .top-actions { display: flex; align-items: center; gap: 15px; }
+    .top-actions > a:not(.primary-button) { display: inline-flex; align-items: center; }
+    .icon-button { display: none; border: 0; background: transparent; color: var(--ink); padding: 5px; }
+    .primary-button, .secondary-button {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border: 1px solid #d18008;
+      border-radius: 9px;
+      background: var(--orange);
+      box-shadow: 0 3px 0 #bd780c;
+      color: #111;
+      font-size: 15px;
+      font-weight: 700;
+      transition: transform .16s, box-shadow .16s, background .16s;
     }
-
-    a,
-    button,
-    article,
-    figure {
-      transition-duration: 180ms;
+    .primary-button:hover, .secondary-button:hover { transform: translateY(-2px); box-shadow: 0 5px 0 #bd780c; }
+    .secondary-button { border-color: #d18008; background: #fff; box-shadow: 0 3px 0 #bd780c; }
+    .mobile-menu { display: none; }
+    .rail {
+      position: fixed;
+      z-index: 5;
+      top: 78px;
+      bottom: 17px;
+      display: flex;
+      width: 116px;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 4px;
     }
-
-    ::selection {
-      background: #f15a3b;
-      color: #fffdf8;
+    .rail-left { left: 3px; }
+    .rail-right { right: 3px; }
+    .rail-link {
+      display: flex;
+      width: 104px;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 2px;
+      color: white;
+      text-align: center;
+      text-shadow: 0 1px 3px rgba(24, 36, 14, .85);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.15;
+      transition: color .15s, transform .15s;
     }
-
+    .rail-link:hover { transform: translateY(-2px); color: #fff3bd; }
+    .rail-link svg { width: 27px; height: 27px; filter: drop-shadow(0 1px 2px rgba(29, 51, 20, .7)); }
+    main { width: min(1470px, calc(100% - 248px)); margin: 20px auto 42px; }
+    .window {
+      position: relative;
+      min-height: 760px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 26px;
+      background: rgba(244, 244, 231, .91);
+      box-shadow: 0 18px 48px rgba(34, 47, 25, .2);
+      backdrop-filter: blur(14px);
+    }
+    .window-controls { position: absolute; top: 17px; right: 18px; display: flex; gap: 13px; color: #878a7d; }
+    .window-controls svg { width: 17px; height: 17px; }
+    .window-content { padding: 62px clamp(28px, 6.5vw, 100px) 38px; }
+    .hero-top { display: grid; grid-template-columns: 1.25fr .95fr; gap: 48px; align-items: center; }
+    .hero-brand { margin-bottom: 30px; font-family: "Space Grotesk", sans-serif; font-size: 27px; }
+    h1, h2, h3 { font-family: "Space Grotesk", sans-serif; letter-spacing: -.045em; }
+    h1 { max-width: 690px; margin: 0; font-size: clamp(36px, 4vw, 57px); line-height: 1.1; }
+    .highlight { color: var(--blue); background: rgba(75, 143, 255, .13); border-radius: 7px; padding: 0 5px 3px; }
+    .hero-copy { max-width: 660px; margin: 22px 0 0; color: #3e495e; font-size: clamp(17px, 1.45vw, 21px); line-height: 1.55; }
+    .hero-copy mark { padding: 0 3px; background: rgba(255, 190, 42, .27); color: inherit; }
+    .social-proof { margin: 25px 0 0; color: var(--muted); font-size: 19px; font-weight: 600; }
+    .setup-card { padding: 22px 20px; border: 1px solid #d2d1c7; border-radius: 9px; background: rgba(255,255,252,.95); box-shadow: 0 18px 26px rgba(55, 54, 44, .12); }
+    .setup-card h2 { margin: 0 0 15px; font-family: "DM Sans", sans-serif; font-size: 20px; letter-spacing: -.025em; }
+    .setup-card ul { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
+    .setup-card li { display: flex; align-items: center; gap: 9px; font-size: 15px; }
+    .setup-card li svg { width: 17px; height: 17px; color: var(--green); }
+    .setup-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+    .showcase { margin-top: 86px; }
+    .showcase-tabs { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: end; gap: 12px; color: var(--muted); font-weight: 700; text-align: center; }
+    .showcase-tabs a { padding: 11px 8px; border-radius: 8px 8px 0 0; }
+    .showcase-tabs a:hover { background: rgba(255,255,255,.55); }
+    .showcase-tabs a:nth-child(2) { color: white; background: var(--hot); }
+    .showcase-card {
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 34px;
+      min-height: 315px;
+      padding: 32px;
+      border: 9px solid var(--hot);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 12px 22px rgba(58, 48, 33, .12);
+    }
+    .chart-preview { position: relative; display: grid; min-height: 245px; place-items: center; overflow: hidden; border: 1px solid #d4d6cd; border-radius: 6px; background-color: #f7f7ef; background-image: radial-gradient(#dedfd6 1px, transparent 1px); background-size: 18px 18px; }
+    .chart-preview svg { width: min(100%, 500px); height: 230px; }
+    .preview-title { position: absolute; top: 14px; left: 18px; display: flex; gap: 7px; align-items: center; font-size: 14px; font-weight: 700; }
+    .preview-copy { align-self: center; }
+    .preview-copy h2 { margin: 0; font-size: clamp(21px, 2vw, 28px); }
+    .preview-copy p { margin: 12px 0 18px; color: var(--muted); font-size: 17px; line-height: 1.5; }
+    .content-section { padding: 65px clamp(22px, 5vw, 76px); border-bottom: 1px solid var(--line); }
+    .content-section:last-child { border-bottom: 0; }
+    .window-lower { overflow: hidden; margin-top: 24px; border: 1px solid rgba(255,255,255,.5); border-radius: 24px; background: rgba(248,247,238,.96); box-shadow: 0 18px 48px rgba(34, 47, 25, .15); }
+    .eyebrow { margin: 0 0 10px; color: #d64f1b; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .section-heading { margin: 0; font-size: clamp(27px, 3vw, 39px); }
+    .section-intro { max-width: 700px; margin: 13px 0 0; color: var(--muted); font-size: 16px; line-height: 1.6; }
+    #kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 30px; }
+    .kpi-card, .stack-card, .chart-card, .project-card { border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+    .kpi-card { padding: 16px; }
+    .kpi-label { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .kpi-label svg { width: 15px; height: 15px; color: #e77724; }
+    .kpi-value { margin-top: 8px; font-family: "Space Grotesk", sans-serif; font-size: 30px; font-weight: 700; }
+    #stack-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 28px; }
+    .stack-card { padding: 19px; transition: transform .18s, box-shadow .18s; }
+    .stack-card:hover, .project-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(40, 44, 31, .1); }
+    .stack-title { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .stack-title svg { width: 19px; color: #e66b23; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 7px; margin: 15px 0 0; padding: 0; list-style: none; }
+    .tag-list li, .filter-button { border: 1px solid #e5d4b9; border-radius: 99px; background: #fff9ef; padding: 5px 10px; color: #554a3a; font-size: 12px; }
+    .chart-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 15px; margin-top: 28px; }
+    .chart-card { min-width: 0; padding: 19px; }
+    .chart-card figcaption { margin-bottom: 18px; font-weight: 700; }
+    .chart-wrap { position: relative; height: 280px; }
+    #filters { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 23px; }
+    .filter-button { cursor: pointer; font-weight: 600; transition: background .15s, color .15s; }
+    .filter-button:hover { border-color: #f17936; }
+    .filter-button[aria-pressed="true"] { border-color: #f17936; background: #f17936; color: white; }
+    #project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; margin-top: 19px; }
+    .project-card { display: flex; flex-direction: column; padding: 22px; transition: transform .18s, box-shadow .18s; }
+    .project-card h3 { margin: 0; font-size: 21px; }
+    .project-label { margin: 18px 0 0; color: #a05a2a; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .project-copy { margin: 5px 0 0; color: #595b56; font-size: 14px; line-height: 1.55; }
+    .project-impact { margin-top: 14px; padding: 13px; border-left: 3px solid #e77836; border-radius: 4px; background: #fff7ed; }
+    .project-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 20px; }
+    .project-links a, .project-links span { display: inline-flex; align-items: center; gap: 7px; border: 1px solid #e2d6c8; border-radius: 6px; padding: 8px 10px; font-size: 12px; font-weight: 700; }
+    .project-links a:first-child { border-color: #202632; background: #202632; color: white; }
+    .project-links svg { width: 14px; height: 14px; }
+    .contact-card { padding: clamp(24px, 4vw, 48px); border: 1px solid #edcda8; border-radius: 14px; background: linear-gradient(130deg, #fff8e8, #fff 75%); }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .contact-actions .secondary-button { box-shadow: none; }
+    footer { padding: 0 20px 26px; color: #4d5940; text-align: center; font-size: 12px; }
+    @media (max-width: 1050px) {
+      .rail { width: 76px; }
+      .rail-link { width: 72px; font-size: 11px; }
+      .rail-link svg { width: 23px; height: 23px; }
+      main { width: calc(100% - 170px); }
+      .hero-top { gap: 25px; }
+      .showcase-card { gap: 20px; padding: 23px; }
+      #stack-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 720px) {
+      .topbar { justify-content: space-between; gap: 10px; padding: 5px 11px; }
+      .top-links { display: none; }
+      .top-actions { gap: 8px; }
+      .top-actions > a:not(.primary-button) { display: none; }
+      .top-actions .primary-button { min-height: 37px; padding: 7px 11px; font-size: 13px; }
+      .icon-button { display: inline-flex; }
+      .mobile-menu { position: absolute; top: 55px; right: 0; left: 0; padding: 8px; border: 1px solid var(--line); border-radius: 9px; background: #f8f7ed; box-shadow: 0 10px 20px #0002; }
+      .mobile-menu.open { display: grid; }
+      .mobile-menu a { padding: 10px; font-weight: 600; }
+      .rail { display: none; }
+      main { width: calc(100% - 20px); margin-top: 12px; }
+      .window, .window-lower { border-radius: 16px; }
+      .window { min-height: auto; }
+      .window-content { padding: 54px 20px 20px; }
+      .hero-top { grid-template-columns: 1fr; gap: 24px; }
+      .hero-brand { margin-bottom: 20px; font-size: 23px; }
+      h1 { font-size: clamp(36px, 10vw, 50px); }
+      .hero-copy { font-size: 17px; }
+      .social-proof { font-size: 15px; }
+      .setup-card { padding: 18px; }
+      .setup-actions { grid-template-columns: 1fr 1fr; }
+      .setup-actions .primary-button, .setup-actions .secondary-button { padding: 8px 5px; font-size: 12px; }
+      .showcase { margin-top: 35px; }
+      .showcase-tabs { gap: 2px; font-size: 11px; }
+      .showcase-card { grid-template-columns: 1fr; gap: 20px; padding: 13px; border-width: 6px; }
+      .chart-preview { min-height: 205px; }
+      .chart-preview svg { height: 195px; }
+      .content-section { padding: 42px 18px; }
+      #stack-grid, .chart-grid, #project-grid { grid-template-columns: 1fr; }
+      .chart-wrap { height: 250px; }
+      .window-controls { top: 14px; right: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
   </style>
 </head>
-
-<body class="bg-slate-950 text-slate-300 font-sans antialiased">
-  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-teal-500 focus:text-slate-950 focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
-
-  <!-- ===== Navigation ===== -->
-  <header class="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
-    <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6" aria-label="Primary">
-      <a href="#top" class="flex items-center gap-2 font-semibold text-white">
-        <span class="flex h-8 w-8 items-center justify-center rounded-md bg-teal-500/10 text-teal-400 ring-1 ring-teal-500/30">
-          <i data-lucide="bar-chart-3" class="h-4 w-4"></i>
-        </span>
-        <span>Home</span>
-      </a>
-      <ul id="nav-links" class="hidden items-center gap-6 text-sm md:flex">
-        <li><a href="#top" class="hover:text-teal-400">Home</a></li>
-        <li><a href="#stack" class="hover:text-teal-400">Stack</a></li>
-        <li><a href="#metrics" class="hover:text-teal-400">Metrics</a></li>
-        <li><a href="#projects" class="hover:text-teal-400">Case Studies</a></li>
-        <li><a href="#contact" class="hover:text-teal-400">Contact</a></li>
-      </ul>
-      <button id="menu-toggle" class="rounded-md p-2 text-slate-300 hover:bg-slate-800 md:hidden" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
-        <i data-lucide="menu" class="h-5 w-5"></i>
-      </button>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="topbar">
+    <a class="brand-mark" href="#top" aria-label="Home">
+      <span class="logo-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    </a>
+    <nav class="top-links" aria-label="Primary navigation">
+      <a href="#projects">Projects</a><a href="#metrics">Insights</a><a href="#stack">Toolkit</a><a href="#contact">About</a><a href="#contact">Contact</a>
     </nav>
-    <ul id="mobile-menu" class="hidden space-y-1 border-t border-slate-800 px-4 py-3 text-sm md:hidden">
-      <li><a href="#top" class="block rounded px-2 py-2 hover:bg-slate-800">Home</a></li>
-      <li><a href="#stack" class="block rounded px-2 py-2 hover:bg-slate-800">Stack</a></li>
-      <li><a href="#metrics" class="block rounded px-2 py-2 hover:bg-slate-800">Metrics</a></li>
-      <li><a href="#projects" class="block rounded px-2 py-2 hover:bg-slate-800">Case Studies</a></li>
-      <li><a href="#contact" class="block rounded px-2 py-2 hover:bg-slate-800">Contact</a></li>
-    </ul>
-  </header>
-
-  <main id="main">
-    <!-- ===== Hero ===== -->
-    <section id="top" class="grid-bg relative overflow-hidden border-b border-slate-800">
-      <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
-        <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1 font-mono text-xs text-teal-300">
-          <span class="h-2 w-2 animate-pulse rounded-full bg-teal-400"></span>
-          <span data-profile="availability">Open to Data Analyst roles</span>
-        </p>
-        <h1 class="max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-          <span data-profile="role">Data Analyst</span><span class="text-teal-400">.</span>
-        </h1>
-        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-400" data-profile="pitch">
-          Transforming raw data into operational efficiency — using SQL, Python and BI dashboards to surface the metrics that drive decisions.
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#projects" class="inline-flex items-center gap-2 rounded-md bg-teal-500 px-5 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-teal-500/20 hover:bg-teal-400">
-            <i data-lucide="layout-dashboard" class="h-4 w-4"></i> View My Case Studies
-          </a>
-          <a data-link="linkedin" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md border border-slate-700 bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:border-teal-500/60">
-            <i data-lucide="linkedin" class="h-4 w-4"></i> LinkedIn
-          </a>
-          <a data-link="resume" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md border border-slate-700 bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:border-teal-500/60">
-            <i data-lucide="file-text" class="h-4 w-4"></i> Resume
-          </a>
-        </div>
-
-        <!-- KPI tiles (computed from project data in script.js) -->
-        <dl id="kpis" class="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3"></dl>
-      </div>
-    </section>
-
-    <!-- ===== Core Analytics Stack ===== -->
-    <section id="stack" class="border-b border-slate-800" aria-labelledby="stack-title">
-      <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <p class="font-mono text-xs uppercase tracking-widest text-teal-400">01 / Toolkit</p>
-        <h2 id="stack-title" class="mt-2 text-3xl font-bold text-white">Core Analytics Stack</h2>
-        <p class="mt-3 max-w-2xl text-slate-400">The tools I use end-to-end: from querying and modelling data to shipping dashboards stakeholders actually use.</p>
-        <div id="stack-grid" class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"></div>
-      </div>
-    </section>
-
-    <!-- ===== Portfolio Metrics ===== -->
-    <section id="metrics" class="border-b border-slate-800 bg-slate-900/40" aria-labelledby="metrics-title">
-      <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <p class="font-mono text-xs uppercase tracking-widest text-teal-400">02 / Portfolio Metrics</p>
-        <h2 id="metrics-title" class="mt-2 text-3xl font-bold text-white">What the data says about my work</h2>
-        <p class="mt-3 max-w-2xl text-slate-400">Live-generated from the project dataset below — tool frequency across all case studies.</p>
-        <div class="mt-10 grid gap-4 lg:grid-cols-3">
-          <figure class="rounded-xl border border-slate-800 bg-slate-900 p-5 lg:col-span-2">
-            <figcaption class="mb-4 flex items-center justify-between text-sm">
-              <span class="font-semibold text-white">Tool usage across projects</span>
-              <span class="font-mono text-xs text-slate-500">count(projects) by tool</span>
-            </figcaption>
-            <div class="relative h-72"><canvas id="toolChart" role="img" aria-label="Bar chart of tool usage across projects"></canvas></div>
-          </figure>
-          <figure class="rounded-xl border border-slate-800 bg-slate-900 p-5">
-            <figcaption class="mb-4 flex items-center justify-between text-sm">
-              <span class="font-semibold text-white">Stack composition</span>
-              <span class="font-mono text-xs text-slate-500">tools by category</span>
-            </figcaption>
-            <div class="relative h-72"><canvas id="categoryChart" role="img" aria-label="Doughnut chart of tools by category"></canvas></div>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Case Studies ===== -->
-    <section id="projects" class="border-b border-slate-800" aria-labelledby="projects-title">
-      <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <p class="font-mono text-xs uppercase tracking-widest text-teal-400">03 / Case Studies</p>
-        <h2 id="projects-title" class="mt-2 text-3xl font-bold text-white">Data Project Case Studies</h2>
-        <p class="mt-3 max-w-2xl text-slate-400">Each project is framed as a business case: the problem, the approach, and the measurable outcome.</p>
-        <div id="filters" class="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter projects by tool"></div>
-        <div id="project-grid" class="mt-6 grid gap-6 md:grid-cols-2"></div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ===== Contact / Footer ===== -->
-  <footer id="contact" class="bg-slate-900/40" aria-labelledby="contact-title">
-    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-      <div class="rounded-2xl border border-slate-800 bg-gradient-to-br from-slate-900 to-blue-950/60 p-8 sm:p-12">
-        <p class="font-mono text-xs uppercase tracking-widest text-teal-400">04 / Contact</p>
-        <h2 id="contact-title" class="mt-2 text-3xl font-bold text-white">Let's turn your data into decisions.</h2>
-        <p class="mt-3 max-w-xl text-slate-400">Hiring for a data or analytics role? I'd love to talk about how I can help your team.</p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a data-link="email" href="#" class="inline-flex items-center gap-2 rounded-md bg-teal-500 px-5 py-3 text-sm font-semibold text-slate-950 hover:bg-teal-400">
-            <i data-lucide="mail" class="h-4 w-4"></i> <span data-profile="email">Email me</span>
-          </a>
-          <a data-link="linkedin" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md border border-slate-700 px-5 py-3 text-sm font-semibold text-white hover:border-teal-500/60">
-            <i data-lucide="linkedin" class="h-4 w-4"></i> LinkedIn
-          </a>
-          <a data-link="github" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md border border-slate-700 px-5 py-3 text-sm font-semibold text-white hover:border-teal-500/60">
-            <i data-lucide="github" class="h-4 w-4"></i> GitHub
-          </a>
-          <a data-link="tableau" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md border border-slate-700 px-5 py-3 text-sm font-semibold text-white hover:border-teal-500/60">
-            <i data-lucide="pie-chart" class="h-4 w-4"></i> Tableau Public
-          </a>
-        </div>
-      </div>
-      <p class="mt-10 text-center font-mono text-xs text-slate-500">
-        &copy; <span id="year"></span> · Data Analyst Portfolio · Built with HTML, Tailwind CSS &amp; Chart.js · Hosted on GitHub Pages
-      </p>
+    <div class="top-actions">
+      <a class="primary-button" href="#projects">Explore my work</a>
+      <a href="#metrics" aria-label="Search projects"><i data-lucide="search"></i></a>
+      <a href="#contact" aria-label="Get in touch"><i data-lucide="message-circle-question"></i></a>
+      <a data-link="linkedin" href="#" aria-label="LinkedIn"><i data-lucide="circle-user-round"></i></a>
+      <button id="menu-toggle" class="icon-button" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu"><i data-lucide="menu"></i></button>
     </div>
-  </footer>
-
+    <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation">
+      <a href="#projects">Projects</a><a href="#metrics">Insights</a><a href="#stack">Toolkit</a><a href="#contact">About &amp; contact</a>
+    </nav>
+  </header>
+  <aside class="rail rail-left" aria-label="Portfolio sections">
+    <a class="rail-link" href="#top"><i data-lucide="house"></i><span>Home</span></a>
+    <a class="rail-link" href="#projects"><i data-lucide="chart-no-axes-combined"></i><span>Analytics<br />projects</span></a>
+    <a class="rail-link" href="#stack"><i data-lucide="brain"></i><span>Data<br />toolkit</span></a>
+    <a class="rail-link" href="#metrics"><i data-lucide="chart-column-increasing"></i><span>Insights</span></a>
+    <a class="rail-link" href="#projects"><i data-lucide="notebook-tabs"></i><span>Case studies</span></a>
+    <a class="rail-link" href="#contact"><i data-lucide="send"></i><span>Say hello</span></a>
+  </aside>
+  <aside class="rail rail-right" aria-label="External links">
+    <a class="rail-link" href="#contact"><i data-lucide="user-round"></i><span>About me</span></a>
+    <a class="rail-link" href="#projects"><i data-lucide="git-pull-request"></i><span>My approach</span></a>
+    <a class="rail-link" data-link="github" href="#"><i data-lucide="github"></i><span>GitHub</span></a>
+    <a class="rail-link" data-link="tableau" href="#"><i data-lucide="chart-pie"></i><span>Tableau</span></a>
+    <a class="rail-link" data-link="resume" href="#"><i data-lucide="file-user"></i><span>Resume</span></a>
+    <a class="rail-link" data-link="email" href="#"><i data-lucide="mail"></i><span>Email</span></a>
+  </aside>
+  <main id="main">
+    <section id="top" class="window" aria-labelledby="hero-title">
+      <div class="window-controls" aria-hidden="true"><i data-lucide="square"></i><i data-lucide="x"></i></div>
+      <div class="window-content">
+        <div class="hero-brand brand-mark"><span class="logo-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>ATHANG</span></div>
+        <div class="hero-top">
+          <div>
+            <h1 id="hero-title">Turn your data into <span class="highlight">clear decisions.</span></h1>
+            <p class="hero-copy">I help teams make sense of <mark>complex data</mark> with thoughtful analysis, useful dashboards, and a little curiosity.</p>
+            <p class="social-proof">SQL, Python &amp; analytics that move work forward.</p>
+          </div>
+          <aside class="setup-card" aria-label="Portfolio highlights">
+            <h2>Data analysis, <mark>made useful</mark></h2>
+            <ul>
+              <li><i data-lucide="check"></i> Clear answers to real questions</li>
+              <li><i data-lucide="check"></i> Reproducible, thoughtful analysis</li>
+              <li><i data-lucide="check"></i> Insight you can put to work</li>
+            </ul>
+            <div class="setup-actions">
+              <a class="primary-button" href="#projects">Explore projects</a>
+              <a class="secondary-button" href="#contact">Get in touch</a>
+            </div>
+          </aside>
+        </div>
+        <div class="showcase">
+          <nav class="showcase-tabs" aria-label="Featured content">
+            <a href="#metrics">Explore the data</a><a href="#projects">Featured work</a><a href="#stack">Tools I use</a>
+          </nav>
+          <article class="showcase-card">
+            <div class="chart-preview" aria-label="Illustration of analytics connecting to a clear result">
+              <span class="preview-title"><i data-lucide="chart-no-axes-column-increasing" style="color:#367ef5"></i> Project analytics</span>
+              <svg viewBox="0 0 500 230" role="img" aria-label="A flow diagram from analysis to insight">
+                <path d="M95 78 C185 78 145 152 230 152 S280 78 405 78" fill="none" stroke="#c7cbbd" stroke-width="2" />
+                <path d="M95 78 C185 78 145 152 230 152 S280 78 405 78" fill="none" stroke="#f1a41f" stroke-width="3" stroke-dasharray="2 14" />
+                <circle cx="95" cy="78" r="10" fill="#367ef5"/><circle cx="405" cy="78" r="10" fill="#f6a324"/>
+                <rect x="140" y="164" width="180" height="42" rx="9" fill="#fff" stroke="#d6d9cf"/>
+                <text x="230" y="190" text-anchor="middle" fill="#242b37" font-size="14" font-family="DM Sans, sans-serif">A clearer next step</text>
+                <text x="95" y="52" text-anchor="middle" fill="#343a45" font-size="13" font-family="DM Sans, sans-serif">Raw data</text>
+                <text x="405" y="52" text-anchor="middle" fill="#343a45" font-size="13" font-family="DM Sans, sans-serif">Insight</text>
+              </svg>
+            </div>
+            <div class="preview-copy">
+              <h2>Curiosity in. Clarity out.</h2>
+              <p>From football analytics to data science, explore how I turn challenging questions into practical analysis.</p>
+              <a href="#projects" class="primary-button">Browse case studies <i data-lucide="arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="window-lower">
+      <section id="stack" class="content-section" aria-labelledby="stack-title">
+        <p class="eyebrow">01 / Toolkit</p>
+        <h2 id="stack-title" class="section-heading">My analytics toolkit</h2>
+        <p class="section-intro">The tools I use end-to-end: from querying and modelling data to building visualisations stakeholders can use.</p>
+        <div id="stack-grid"></div>
+      </section>
+      <section id="metrics" class="content-section" aria-labelledby="metrics-title">
+        <p class="eyebrow">02 / Portfolio metrics</p>
+        <h2 id="metrics-title" class="section-heading">A few numbers behind the work</h2>
+        <p class="section-intro">A live look across my projects and the tools used to bring them to life.</p>
+        <dl id="kpis"></dl>
+        <div class="chart-grid">
+          <figure class="chart-card">
+            <figcaption>Tools used across projects</figcaption>
+            <div class="chart-wrap"><canvas id="toolChart" role="img" aria-label="Bar chart of tool usage across projects"></canvas></div>
+          </figure>
+          <figure class="chart-card">
+            <figcaption>Toolkit by category</figcaption>
+            <div class="chart-wrap"><canvas id="categoryChart" role="img" aria-label="Doughnut chart of tools by category"></canvas></div>
+          </figure>
+        </div>
+      </section>
+      <section id="projects" class="content-section" aria-labelledby="projects-title">
+        <p class="eyebrow">03 / Case studies</p>
+        <h2 id="projects-title" class="section-heading">Projects, with the why included</h2>
+        <p class="section-intro">A selection of data projects, the questions behind them, and what the analysis helps us understand.</p>
+        <div id="filters" role="group" aria-label="Filter projects by tool"></div>
+        <div id="project-grid"></div>
+      </section>
+      <footer id="contact" class="content-section" aria-labelledby="contact-title">
+        <div class="contact-card">
+          <p class="eyebrow">04 / Contact</p>
+          <h2 id="contact-title" class="section-heading">Let's find the signal in your data.</h2>
+          <p class="section-intro">Hiring for a data or analytics role? I'd love to talk about how I can help your team.</p>
+          <div class="contact-actions">
+            <a data-link="email" href="#" class="primary-button"><i data-lucide="mail"></i> <span data-profile="email">Email me</span></a>
+            <a data-link="linkedin" href="#" class="secondary-button"><i data-lucide="linkedin"></i> LinkedIn</a>
+            <a data-link="github" href="#" class="secondary-button"><i data-lucide="github"></i> GitHub</a>
+            <a data-link="tableau" href="#" class="secondary-button"><i data-lucide="chart-pie"></i> Tableau Public</a>
+          </div>
+        </div>
+        <p style="margin:22px 0 0">&copy; <span id="year"></span> · Data Analyst Portfolio · Built with HTML, CSS &amp; Chart.js · Hosted on GitHub Pages</p>
+      </footer>
+    </div>
+  </main>
   <script src="assets/script.js"></script>
 </body>
 </html>
