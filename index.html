@@ -13,8 +13,47 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            sans: ['DM Sans', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['Space Grotesk', 'DM Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
             mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            slate: {
+              950: '#f7f4ec',
+              900: '#fffdf8',
+              800: '#e8e1d4',
+              700: '#d5cbb9',
+              500: '#786f62',
+              400: '#5c554b',
+              300: '#423d35',
+              200: '#29251f',
+            },
+            teal: {
+              50: '#fff1ec',
+              100: '#ffe0d6',
+              200: '#ffc2b1',
+              300: '#ff987e',
+              400: '#fa7157',
+              500: '#f15a3b',
+              600: '#dc4329',
+              700: '#b93622',
+              800: '#922e20',
+              900: '#76291f',
+              950: '#40130e',
+            },
+            blue: {
+              50: '#eff6ff',
+              100: '#dceaff',
+              200: '#b8d4ff',
+              300: '#8cb9ff',
+              400: '#5d98f4',
+              500: '#3877da',
+              600: '#285fba',
+              700: '#244c91',
+              800: '#223f73',
+              900: '#20365e',
+              950: '#14213b',
+            },
           },
         },
       },
@@ -22,19 +61,53 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Lucide Icons & Chart.js -->
   <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
 
   <style>
-    .grid-bg {
-      background-image:
-        linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
-      background-size: 32px 32px;
+    body {
+      background-color: #f7f4ec;
+      color: #423d35;
     }
+
+    .text-white {
+      color: #29251f !important;
+    }
+
+    .grid-bg {
+      background-color: #fff9e9;
+      background-image:
+        linear-gradient(rgba(241, 90, 59, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(241, 90, 59, 0.07) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+
+    #top {
+      background-image: radial-gradient(ellipse at 82% 18%, rgba(255, 212, 92, 0.32), transparent 32%);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+      letter-spacing: -0.035em;
+    }
+
+    a,
+    button,
+    article,
+    figure {
+      transition-duration: 180ms;
+    }
+
+    ::selection {
+      background: #f15a3b;
+      color: #fffdf8;
+    }
+
   </style>
 </head>
 

@@ -159,7 +159,7 @@ function renderKPIs() {
   document.getElementById("kpis").innerHTML = kpis
     .map(
       (k) => `
-      <div class="rounded-lg border border-slate-800 bg-slate-900/70 p-4">
+      <div class="rounded-xl border border-slate-800 bg-slate-900/70 p-5 shadow-sm">
         <dt class="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-slate-500">
           <i data-lucide="${k.icon}" class="h-3.5 w-3.5 text-teal-400"></i>${escapeHTML(k.label)}
         </dt>
@@ -173,7 +173,7 @@ function renderStack() {
   document.getElementById("stack-grid").innerHTML = stack
     .map(
       (group) => `
-      <article class="rounded-xl border border-slate-800 bg-slate-900 p-5 transition hover:border-teal-500/50">
+      <article class="rounded-xl border border-slate-800 bg-slate-900 p-5 shadow-sm transition hover:-translate-y-1 hover:border-teal-500/60 hover:shadow-lg">
         <div class="flex items-center gap-3">
           <span class="flex h-9 w-9 items-center justify-center rounded-md bg-blue-500/10 text-blue-400 ring-1 ring-blue-500/30">
             <i data-lucide="${escapeHTML(group.icon)}" class="h-4 w-4"></i>
@@ -197,7 +197,7 @@ function projectCard(project) {
   const github = safeURL(project.githubLink);
   const dashboard = safeURL(project.dashboardLink);
   return `
-    <article class="flex flex-col rounded-xl border border-slate-800 bg-slate-900 p-6 transition hover:-translate-y-0.5 hover:border-teal-500/50">
+    <article class="flex flex-col rounded-2xl border border-slate-800 border-t-4 border-t-teal-500 bg-slate-900 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
       <h3 class="text-xl font-bold text-white">${escapeHTML(project.title)}</h3>
 
       <div class="mt-4">
@@ -270,8 +270,8 @@ function renderProjects() {
 function renderCharts() {
   if (typeof Chart === "undefined") return;
 
-  Chart.defaults.color = "#94a3b8";
-  Chart.defaults.font.family = "Inter, ui-sans-serif, system-ui, sans-serif";
+  Chart.defaults.color = "#786f62";
+  Chart.defaults.font.family = "DM Sans, Inter, ui-sans-serif, system-ui, sans-serif";
 
   const counts = {};
   projects.forEach((p) => p.toolsUsed.forEach((t) => (counts[t] = (counts[t] || 0) + 1)));
@@ -285,8 +285,8 @@ function renderCharts() {
         {
           label: "Projects",
           data: sorted.map(([, n]) => n),
-          backgroundColor: "rgba(45, 212, 191, 0.7)",
-          hoverBackgroundColor: "#2dd4bf",
+          backgroundColor: "rgba(241, 90, 59, 0.78)",
+          hoverBackgroundColor: "#dc4329",
           borderRadius: 4,
         },
       ],
@@ -296,7 +296,7 @@ function renderCharts() {
       plugins: { legend: { display: false } },
       scales: {
         x: { grid: { display: false }, ticks: { autoSkip: false, maxRotation: 60 } },
-        y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: "rgba(148, 163, 184, 0.1)" } },
+        y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: "rgba(120, 111, 98, 0.16)" } },
       },
     },
   });
@@ -308,8 +308,8 @@ function renderCharts() {
       datasets: [
         {
           data: stack.map((g) => g.tools.length),
-          backgroundColor: ["#2dd4bf", "#3b82f6", "#6366f1", "#64748b"],
-          borderColor: "#0f172a",
+          backgroundColor: ["#f15a3b", "#ffd45c", "#3877da", "#a886bd"],
+          borderColor: "#fffdf8",
           borderWidth: 3,
         },
       ],
