@@ -13,7 +13,7 @@ const profile = {
   email: "athangghag@gmail.com",
   linkedin: "https://www.linkedin.com/in/athangghag/",
   github: "https://github.com/athang11",
-  resume: "https://athang11.github.io/resume/",
+  resume: "https://raw.githubusercontent.com/athang11/resume/main/docs/resume.pdf",
   tableau: "https://public.tableau.com/app/profile/your-profile",
 };
 
