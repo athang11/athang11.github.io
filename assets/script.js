@@ -6,15 +6,15 @@
 // Leave a link as an empty string ("") to hide the buttons that use it.
 const profile = {
   name: "Home",
-  role: "Medical Statistician | Statistical Programmer",
-  availability: "Open to medical statistics and statistical programming roles",
+  role: "Data Analyst | Medical Statistician",
+  availability: "Open to data analysis and medical statistics opportunities",
   pitch:
-    "Applying R, regression and mixed-effects models to clinical data, with reproducible analysis and clear statistical reporting.",
+    "Turning data into clear, reproducible insights across healthcare, sport, and environmental projects.",
   email: "athangghag@gmail.com",
   linkedin: "https://www.linkedin.com/in/athangghag/",
   github: "https://github.com/athang11",
   resume: "https://athang11.github.io/resume/resume.pdf",
-  tableau: "https://public.tableau.com/app/profile/your-profile",
+  tableau: "",
 };
 
 // Core analytics stack, grouped by category.
