@@ -6,10 +6,10 @@
 // Leave a link as an empty string ("") to hide the buttons that use it.
 const profile = {
   name: "Home",
-  role: "Data Analyst",
-  availability: "Open to Data Analyst roles",
+  role: "Medical Statistician | Statistical Programmer",
+  availability: "Open to medical statistics and statistical programming roles",
   pitch:
-    "Transforming raw data into operational efficiency — using SQL, Python and BI dashboards to surface the metrics that drive decisions.",
+    "Applying R, regression and mixed-effects models to clinical data, with reproducible analysis and clear statistical reporting.",
   email: "athangghag@gmail.com",
   linkedin: "https://www.linkedin.com/in/athangghag/",
   github: "https://github.com/athang11",
@@ -20,24 +20,24 @@ const profile = {
 // Core analytics stack, grouped by category.
 const stack = [
   {
-    category: "Languages",
+    category: "Programming & reporting",
     icon: "code-2",
-    tools: ["SQL", "Python", "R"],
+    tools: ["R", "R Markdown", "Git"],
   },
   {
-    category: "BI & Visualization",
-    icon: "bar-chart-3",
-    tools: ["Tableau", "Power BI", "Looker Studio", "Excel"],
+    category: "Statistical methods",
+    icon: "chart-no-axes-combined",
+    tools: ["Linear regression", "Mixed-effects models", "Model comparison", "Residual diagnostics", "Power & sample-size analysis"],
   },
   {
-    category: "Libraries & Frameworks",
+    category: "Clinical data",
+    icon: "heart-pulse",
+    tools: ["Patient-level data", "Hospital/site clustering", "Oncology sample data"],
+  },
+  {
+    category: "R packages & graphics",
     icon: "boxes",
-    tools: ["Pandas", "NumPy", "Seaborn", "Scikit-Learn"],
-  },
-  {
-    category: "Cloud & Databases",
-    icon: "database",
-    tools: ["PostgreSQL", "BigQuery", "AWS", "Git"],
+    tools: ["lme4", "dplyr", "Base R graphics"],
   },
 ];
 
@@ -45,6 +45,17 @@ const stack = [
 // Fields: title, problem, toolsUsed, keyInsight, githubLink, dashboardLink
 // Set dashboardLink to "" if the project has no live dashboard.
 const projects = [
+  {
+    title: "Medical Statistics: Mixed Models in Cancer Data",
+    problem:
+      "Coursework analysis of 210 sample cancer-patient records across 12 hospitals, examining age at death in relation to age at diagnosis and metastases while accounting for hospital clustering.",
+    toolsUsed: ["R", "R Markdown", "lme4", "dplyr", "Linear regression", "Mixed-effects models", "Residual diagnostics", "Power & sample-size analysis"],
+    keyInsight:
+      "Compared linear and random-intercept models, assessed residual assumptions, and estimated an intraclass correlation of about 10% for hospital-level variation. Coursework using sample data; results are not clinical evidence.",
+    githubLink:
+      "https://github.com/athang11/Medical-Statistics/blob/main/Mixed%20Models%20with%20Medical%20Applications/assignment1.Rmd",
+    dashboardLink: "",
+  },
   {
     title: "Expected Goals (xG) Model",
     problem:
@@ -312,6 +323,61 @@ function renderCharts() {
       maintainAspectRatio: false,
       cutout: "65%",
       plugins: { legend: { position: "bottom", labels: { boxWidth: 10, padding: 12 } } },
+    },
+  });
+
+  new Chart(document.getElementById("siteVarianceChart"), {
+    type: "doughnut",
+    data: {
+      labels: ["Between-hospital variance", "Within-hospital residual variance"],
+      datasets: [
+        {
+          data: [2.174, 19.353],
+          backgroundColor: ["#f15a3b", "#367ef5"],
+          borderColor: "#fffdf8",
+          borderWidth: 3,
+        },
+      ],
+    },
+    options: {
+      maintainAspectRatio: false,
+      cutout: "62%",
+      plugins: {
+        legend: { position: "bottom", labels: { boxWidth: 10, padding: 12 } },
+        tooltip: {
+          callbacks: {
+            label: (context) => `${context.label}: ${context.raw.toFixed(3)} (variance)`,
+          },
+        },
+      },
+    },
+  });
+
+  new Chart(document.getElementById("modelEffectsChart"), {
+    type: "bar",
+    data: {
+      labels: ["Age at diagnosis", "Metastases (yes)"],
+      datasets: [
+        {
+          label: "Estimated coefficient (years)",
+          data: [0.8829, 1.1152],
+          backgroundColor: ["rgba(54, 126, 245, .78)", "rgba(241, 90, 59, .78)"],
+          borderRadius: 4,
+        },
+      ],
+    },
+    options: {
+      indexAxis: "y",
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: {
+          beginAtZero: true,
+          title: { display: true, text: "Estimated coefficient (years)" },
+          grid: { color: "rgba(120, 111, 98, 0.16)" },
+        },
+        y: { grid: { display: false } },
+      },
     },
   });
 }
